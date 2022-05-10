@@ -1,0 +1,28 @@
+{
+  "name": "alexareviews",
+  "version": "1.0.0",
+  "description": "",
+  "main": "DAO.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/glue": "^8.0.0",
+    "@hapi/good": "^9.0.1",
+    "@hapi/good-console": "^9.0.1",
+    "@hapi/good-squeeze": "^6.0.0",
+    "@hapi/hapi": "^20.2.2",
+    "@hapi/inert": "^6.0.5",
+    "@hapi/vision": "^6.1.0",
+    "hapi-pino": "^9.3.0",
+    "hapi-swagger": "^14.3.0",
+    "joi": "^17.6.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3",
+    "pino-pretty": "^7.6.1"
+  }
+}
