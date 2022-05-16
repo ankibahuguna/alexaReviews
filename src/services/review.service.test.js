@@ -12,12 +12,80 @@ beforeEach(() => {
 
 describe("Review service: ", () => {
     it("getAllReviews should retrieve reviews from model", async () => {
+        const expectedReviews = [
+            {
+                review: "Pero deberia de poder cambiarle el idioma a alexa",
+                author: "WarcryxD",
+                review_source: "iTunes",
+                rating: 4,
+                title: "Excelente",
+                product_name: "Amazon Alexa",
+                reviewed_date: "2018-01-13T02:27:03.000Z",
+            },
+
+            {
+                review: "This is a wonderfull application",
+                author: "Ankit Bahuguna",
+                review_source: "GooglePlayStore",
+                rating: 5,
+                title: "Great app",
+                product_name: "Amazon Alexa",
+                reviewed_date: "2018-01-13T02:27:03.000Z",
+            },
+            {
+                rating: 1,
+                review: "football",
+                review_source: "iTunes",
+                reviewed_date: "2018-01-12T02:27:03.000Z",
+            },
+            {
+                rating: 4,
+                review: "football",
+                review_source: "iTunes",
+                reviewed_date: "2018-11-12T02:27:03.000Z",
+            },
+            {
+                rating: 2,
+                review: "football",
+                review_source: "iTunes",
+                reviewed_date: "2018-11-12T02:27:03.000Z",
+            },
+            {
+                rating: 1,
+                review: "test Rrevie",
+                review_source: "GooglePlayStore",
+                reviewed_date: "2018-11-12T02:27:03.000Z",
+            },
+            {
+                rating: 5,
+                review: "test Rrevie",
+                review_source: "GooglePlayStore",
+                reviewed_date: "2018-01-12T02:27:03.000Z",
+            },
+        ];
+        const mockFindAll = jest.fn();
+
+        ReviewsModel.prototype.findAll = mockFindAll;
+
+        mockFindAll.mockReturnValue(Promise.resolve(expectedReviews));
+
         const reviewService = new ReviewService(new ReviewsModel(new DAO()));
-        await reviewService.getAllReviews({});
 
-        const mockReviewModel = ReviewsModel.mock.instances[0];
+        const results = await reviewService.getAllReviews({});
 
-        expect(mockReviewModel.findAll).toHaveBeenCalled();
+        expect(Array.isArray(results)).toEqual(true);
+
+        const filtered = await reviewService.getAllReviews({
+            store: "GooglePlayStore",
+            date: "2018-01-13T02:27:03.000Z",
+        });
+
+        expect(Array.isArray(filtered)).toEqual(true);
+        expect(
+            filtered.every((r) => r.review_source === "GooglePlayStore")
+        ).toEqual(true);
+
+        expect(filtered.length).toEqual(1);
     });
 
     it("getAverageMonthlyRatingsByStore should return average monthly ratings per store", async () => {
@@ -29,7 +97,7 @@ describe("Review service: ", () => {
                 rating: 4,
                 title: "Excelente",
                 product_name: "Amazon Alexa",
-                reviewed_date: "2018-01-12T02:27:03.000Z",
+                reviewed_date: "2018-01-13T02:27:03.000Z",
             },
             {
                 rating: 1,
