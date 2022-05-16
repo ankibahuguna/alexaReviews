@@ -2,11 +2,10 @@ const ReviewService = require("./reviews.service");
 const ReviewsModel = require("../models/reviews");
 const DAO = require("../db/DAO");
 
-jest.mock("../models/reviews"); // SoundPlayer is now a mock constructor
-jest.mock("../db/DAO"); // SoundPlayer is now a mock constructor
+jest.mock("../models/reviews"); 
+jest.mock("../db/DAO"); 
 
 beforeEach(() => {
-    // Clear all instances and calls to constructor and all methods:
     ReviewsModel.mockClear();
 });
 

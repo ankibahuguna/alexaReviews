@@ -73,4 +73,30 @@ describe("Handlers : ", () => {
         expect(typeof data.result.GooglePlayStore).toBe("object");
     });
 
+    test("should fail if the review doesn't contain rating", async function () {
+
+        const server = Hapi.server({
+            port: 3000,
+            host: "localhost",
+        });
+
+        // eslint-disable-next-line global-require
+        const Reviews = require("../routes/reviews")();
+
+        server.route(Reviews);
+        const newReview = {
+            review_source: 'iTunes',
+            author: 'Ankit',
+            title: 'Cool'
+        }
+        const options = {
+            method: "POST",
+            url: "/reviews",
+            payload: JSON.stringify(newReview)
+        };
+        const data = await server.inject(options);
+        expect(data.statusCode).toBe(400);
+
+    });
+
 });

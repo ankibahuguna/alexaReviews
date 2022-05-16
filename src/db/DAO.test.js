@@ -5,4 +5,10 @@ describe("DAO", () => {
             new DAO();
         }).toThrow(Error);
     });
+
+    it("should store filename in instance variable", () => {
+        const dao = new DAO("package.json");
+
+        expect(dao.filepath).toEqual("package.json");
+    });
 });
