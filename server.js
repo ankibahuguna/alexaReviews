@@ -22,3 +22,5 @@ process
     // eslint-disable-next-line no-console
     console.error(err, 'Uncaught Exception thrown');
   });
+
+module.exports = server

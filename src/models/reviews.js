@@ -14,7 +14,6 @@ class ReviewModel {
 
     async findAll() {
         const data = await this.db.read();
-
         return this._formatReviews(data);
     }
 
